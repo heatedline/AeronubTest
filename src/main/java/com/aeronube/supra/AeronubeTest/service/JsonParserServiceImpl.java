@@ -13,7 +13,11 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
 import com.aeronube.supra.AeronubeTest.dto.BookDTO;
+import com.aeronube.supra.AeronubeTest.dto.ReviewDTO;
 import com.aeronube.supra.AeronubeTest.model.Book;
+import com.aeronube.supra.AeronubeTest.model.Review;
+import com.aeronube.supra.AeronubeTest.repository.BookRepository;
+import com.aeronube.supra.AeronubeTest.repository.ReviewRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service("JsonParserService")
@@ -26,17 +30,33 @@ public class JsonParserServiceImpl implements JsonParserService {
 	private ResourceLoader resourceLoader;
 	@Autowired
 	Mapper mapper;
+	@Autowired
+	private BookRepository bookRepository;
+	@Autowired
+	private ReviewRepository reviewRepository;
 
 	@Override
 	public BookDTO[] readTestJsonWithObjectMapper() throws IOException {
 		// TODO Auto-generated method stub
         ObjectMapper objectMapper = new ObjectMapper();
 
-        BookDTO[] bookDTO = objectMapper.readValue(new File(resourceLoader.getResource("classpath:test.json").getURI().getPath()), BookDTO[].class);
+        BookDTO[] bookDTOArr = objectMapper.readValue(new File(resourceLoader.getResource("classpath:test.json").getURI().getPath()), BookDTO[].class);
 
-        log.info(bookDTO.toString());
+        log.info(bookDTOArr.toString());
         
-        return bookDTO;
+        
+        for(BookDTO bookDTO : bookDTOArr) {
+        	Book book = mapper.map(bookDTO, Book.class);
+        	bookRepository.save(book);
+        	for(ReviewDTO reviewDTO : bookDTO.getReviews()) {
+        		//Book book2 = bookRepository.findOne(id)
+            	Review review = mapper.map(reviewDTO, Review.class);
+        		//System.out.println(reviewDTO.toString());
+        		reviewRepository.save(review);
+        	}
+        }
+        
+        return bookDTOArr;
 	}
 
 	

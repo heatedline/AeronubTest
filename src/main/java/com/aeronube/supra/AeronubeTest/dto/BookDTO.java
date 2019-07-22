@@ -12,7 +12,7 @@ public class BookDTO {
 	private String author;
 	private Date publishedDate;
 	private String isbn;
-	private List<Review> reviews;
+	private List<ReviewDTO> reviews;
 	public int getId() {
 		return id;
 	}
@@ -43,10 +43,10 @@ public class BookDTO {
 	public void setIsbn(String isbn) {
 		this.isbn = isbn;
 	}
-	public List<Review> getReviews() {
+	public List<ReviewDTO> getReviews() {
 		return reviews;
 	}
-	public void setReviews(List<Review> reviews) {
+	public void setReviews(List<ReviewDTO> reviews) {
 		this.reviews = reviews;
 	}
 	@Override
