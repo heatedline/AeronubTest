@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Built-By: saheli
+Build-Jdk: 11.0.3
+Implementation-Title: AeronubeTest
+Implementation-Version: 0.0.1
+Implementation-Vendor-Id: com.aeronube.supra
+Implementation-Vendor: Pivotal Software, Inc.
+Created-By: Maven Integration for Eclipse
+
