@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.aeronube.supra.AeronubeTest.dto.BookDTO;
-import com.aeronube.supra.AeronubeTest.dto.SearchBookDTO;
 import com.aeronube.supra.AeronubeTest.service.JsonParserService;
 
 @RestController
