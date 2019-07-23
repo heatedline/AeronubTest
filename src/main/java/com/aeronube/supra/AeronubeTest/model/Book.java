@@ -38,7 +38,7 @@ public class Book implements Serializable {
 	// bi-directional many-to-one association to Review
 	@OneToMany(mappedBy = "book")
 	private List<Review> reviews;
-
+	
 	public int getId() {
 		return id;
 	}

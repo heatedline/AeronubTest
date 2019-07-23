@@ -38,7 +38,7 @@ public class Review implements Serializable {
 	
 	// bi-directional many-to-one association to ClientMaster
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "reviewId")
+	@JoinColumn(name = "bookId")
 	private Book book;
 
 	public Review() {

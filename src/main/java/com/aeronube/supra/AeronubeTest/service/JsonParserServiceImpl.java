@@ -2,6 +2,8 @@ package com.aeronube.supra.AeronubeTest.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -51,12 +53,29 @@ public class JsonParserServiceImpl implements JsonParserService {
         	for(ReviewDTO reviewDTO : bookDTO.getReviews()) {
         		//Book book2 = bookRepository.findOne(id)
             	Review review = mapper.map(reviewDTO, Review.class);
+            	review.setBook(book);
         		//System.out.println(reviewDTO.toString());
         		reviewRepository.save(review);
         	}
         }
         
         return bookDTOArr;
+	}
+
+	@Override
+	public List<BookDTO> searchBook(String title) {
+		// TODO Auto-generated method stub
+		List<BookDTO> bookDTOList = new ArrayList<BookDTO>(); 
+		List<Book> searchedBookList = bookRepository.searchBookByTitle("%" + title + "%");
+		if(searchedBookList != null && searchedBookList.size() > 0) {
+			for(Book book : searchedBookList) {
+				BookDTO bookDTO = mapper.map(book, BookDTO.class);
+				bookDTOList.add(bookDTO);
+			}
+		} else {
+			bookDTOList = new ArrayList<BookDTO>(); 
+		}
+		return bookDTOList;
 	}
 
 	
